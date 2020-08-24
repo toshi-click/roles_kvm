@@ -1,15 +1,17 @@
 ---
-- name: Install multi packages
+- name: apt install kvm packages
   apt:
-    name:
+    name: "{{ packages }}"
+    update_cache: yes
+    cache_valid_time: 3600
+    state: present
+  vars:
+    packages:
       - bridge-utils
       - libvirt-clients
       - libvirt-daemon-system
       - qemu-kvm
       - virt-manager
-    state: present
-    update_cache: yes
-    cache_valid_time: 3600
 
 - name: start enable libvirtd
   service:
